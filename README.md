@@ -6,11 +6,12 @@ Minecraft **26.1.2 / NeoForge 26.1.2.115** 的 Kotlin 服务端基础管理 Mod�
 ## 安装
 
 1. 使用 **JDK 25** 启动上述版本的独立 NeoForge 服务端。
-2. 将 `LynxTools-1.0.0.jar` 和 **LuckPerms NeoForge 5.5.52** 放进服务器 `mods/`。
+2. 将 `LynxTools-1.0.4.jar` 和兼容的 **LuckPerms NeoForge** 放进服务器 `mods/`（最低 5.5.52）。
 3. 正常启动。首次启动会生成默认配置、语言文件和 SQLite 数据库。
 4. 根据需要通过 LuckPerms 授予权限；OP 身份本身不会绕过 LynxTools 的权限检查。
 
 LuckPerms 是必需服务端依赖，编译使用 API 5.5；本项目实际加载验证的是 NeoForge 5.5.52 发行包。
+当前生产环境使用 5.5.85；1.0.1 本次只执行构建与单元测试，没有连接生产服或重新启动游戏验证该发行包。
 勿使用 Bukkit/Fabric/Forge 版本替代。更新 LuckPerms 时先确认其发行包支持 MC 26.1.2。
 
 Kotlin 标准库 **2.3.20** 和 SQLite JDBC **3.51.3.0** 通过 NeoForge Jar-in-Jar 嵌入成品 JAR，各一份。
@@ -32,13 +33,14 @@ TOML 解析使用 NeoForge 自带 NightConfig **3.8.3**。Mixin/MixinExtras 使�
 | `/warp <名称>` | `lynxtools.command.warp` | 开放 | 允许访问的已保存 warp |
 | `/setwarp <名称>` | `lynxtools.command.setwarp` | 拒绝 | 允许访问的已保存名称 |
 | `/setwarp <名称> <x> <y> <z> [yaw] [pitch]` | 同上 | 拒绝 | 名称后逐项补全服务端实体当前坐标与朝向 |
-| `/home` | `lynxtools.command.home` | 开放 | 命令名，无参数 |
-| `/sethome` | `lynxtools.command.sethome` | 开放 | 命令名，无参数 |
-| `/back` | `lynxtools.command.back` | 开放 | 命令名，无参数 |
+| `/home` | `lynxtools.command.home` | 拒绝 | 命令名，无参数 |
+| `/sethome` | `lynxtools.command.sethome` | 拒绝 | 命令名，无参数 |
+| `/back` | `lynxtools.command.back` | 拒绝 | 命令名，无参数 |
 | `/gm <0/1/2/3/s/c/a/p>` | `lynxtools.command.gm` | 拒绝 | 八种模式别名 |
 | `/fly` | `lynxtools.command.fly` | 拒绝 | 命令名 |
+| `/vanish` | `lynxtools.command.vanish` | 拒绝 | 命令名，无参数；仅创造模式可开启，同一权限可看见隐身玩家 |
 | `/fly <在线玩家名>` | `lynxtools.command.fly.others` | 拒绝 | 有此权限才返回在线玩家名 |
-| `/suicide` | `lynxtools.command.suicide` | 拒绝 | 命令名 |
+| `/suicide` | `lynxtools.command.suicide` | 开放 | 命令名 |
 | `/suicide KeepInventory` | 同时需要 `lynxtools.command.suicide` 和 `lynxtools.command.suicide.keepinventory` | 拒绝 | 仅有附加权限且当前维度 gamerule 为 false 时显示 `KeepInventory` |
 | `/tpr <在线玩家>`、`/tprequest <在线玩家>` | `lynxtools.command.tpr` | 开放 | 可处理传送状态的在线玩家，不包含自己 |
 | `/tpa [请求者或请求ID]`、`/tpaccept ...` | `lynxtools.command.tpa` | 开放 | 仅补全自己收到的待处理请求者 |
@@ -68,6 +70,83 @@ lp user <玩家或UUID> permission set lynxtools.command.tpd true
 ```
 
 ## 行为
+
+1.0.3 名牌支持当前 LuckPerms 上下文的 `name-gradient-start` / `name-gradient-end` 元数据，
+两个有效 `#RRGGBB` 端点会覆盖配置模板，对完整“前缀 名字 后缀”统一渐变。
+缺失或无效时回退 `nametags.name_format`；整条标签会清理历史颜色控制码，称号文本保持不变。
+详细优先级、组配色示例与迁移说明见 [NAMETAGS.md](docs/NAMETAGS.md)。
+
+### 加入与退出公告（1.0.4）
+
+默认接管原版广播：加入 `&8&l[&a&l+&8&l]`，退出 `&8&l[&c&l-&8&l]`，
+后接完整的 LuckPerms 前缀、名字和后缀；使用当前上下文组渐变端点，与头顶名牌共享格式计算。
+这些是服务器加入/退出通知，与账户认证 Mod 的 `/login` 登录提示不同。
+无需客户端 Mod，也不要求开启可选的 `nametags.enabled` 网络同步。
+
+`modules.presence=false` 恢复原版消息；模块开启时 `presence.join=false` 或 `presence.quit=false`
+分别静音对应公告。均可热更新。语言资源中的 `join_message`/`quit_message` 默认为 `{marker} {name}`；
+`join_marker`/`quit_marker` 可调整颜色与加粗，支持传统 `&0–&f`、`&k–&o`、`&r`（也支持 §）。
+仅标记解析旧颜色码；其余模板为纯文本占位符，名字是已格式化的原生 Component，不执行输入中的标签。
+加入通知延后到玩家注册完成的下一 tick；退出在 LP 卸载前计算，隐身玩家退出仅对有可见权限的玩家广播。
+停服期间不额外发送退出公告。模块仅替换原版调用点；第三方 Mod 自行发公告需要关闭其对应功能以避免重复。
+
+### 命令反馈（1.0.2）
+
+所有 LynxTools 命令都向执行者反馈结果；`/gm` 成功也会向本人显示当前模式。
+单人命令不向其它玩家发送反馈；`/suicide` 产生的原生死亡聊天公告同样仅发给本人，
+其它自然死亡继续使用原版规则。后台日志保留，不修改全服 gamerule。
+传送请求等多人操作仅通知相关双方，不向无关玩家广播。
+
+### 创造模式隐身（1.0.2）
+
+`/vanish` 切换自己的隐身，`lynxtools.command.vanish` 默认拒绝。
+只有创造模式可以开启；有同一权限的玩家仍能看到隐身玩家，无权限玩家不能看到其实体、
+装备、手持物、名牌及依赖该实体渲染的效果，TAB 和原生玩家名补全也会隐藏。
+每 tick 复核当前权限和模式；离开创造模式、失去权限、模块关闭时解除并提示本人。
+状态不持久化，退出后清除，重新登录默认可见；跨维度保持，死亡/重生后清除。
+`[modules] vanish` 控制模块，`[permissions] vanish` 控制 LP UNDEFINED 的策略，均可热重载。
+消息可在语言文件中修改；旧配置不覆盖，缺失键使用内嵌默认值。
+
+**保留**攻击、物品使用、丢弃/拾取、实体交互和方块操作。
+因此攻击结果、掉落物以及其它世界交互仍可暴露存在，不承诺这些操作无痕。
+原版箱子（含陷阱箱）、末影箱、木桶和潜影盒不会因为隐身玩家打开而改变开合计数、
+触发开合声音或动画；正常玩家同时打开时保留正常行为。切换隐身前会关闭当前容器，避免计数错配。
+不接管其它 Mod 自己实现的容器动画。
+
+为了隐藏原生客户端的玩家名补全，必须移除该客户端的玩家资料。隐身玩家发言时，
+无权限接收者收不到消息；本人及有权限接收者仍收到正常玩家聊天，签名计数不会被伪造。
+第三方聊天 Mod 如果完全替换原生聊天分发、使用无来源系统消息，需要另做适配。
+服务端名牌扩展也按同一可见性发送。客户端无需安装 LynxTools 或新版 LynxTags。
+
+隐身依靠服务器原生实体追踪和按来源过滤的声音/粒子包，不使用药水、盔甲架或展示实体。
+不会按坐标范围删除周围环境特效。其它 Mod 脱离玩家调用链发送的无来源声音/粒子、
+自定义数据和第三方玩家查询不在可靠过滤范围内；原版 `/list`、管理命令/选择器也未接管。
+
+### 1.0.1 默认权限与旧配置迁移
+
+LP 返回 `UNDEFINED` 时，仅默认开放 `tpr`、`tpa`、`tpd`、`warp`、`suicide`。
+其它玩家能力默认拒绝；普通自杀仍遵循当前世界 keep_inventory，附加 `KeepInventory` 默认拒绝。
+LP 的 `TRUE` / `FALSE` 直接决定结果；插件不自行解释 `*` 或 `lynxtools.command.*`，不绕过 LP 返回的明确拒绝。
+
+已有 `plugins/LynxTools/Config.toml` 不会被覆盖。升级 JAR 需要重启服务器；旧配置要采用新策略，
+请将 `[permissions]` 中 `home`、`sethome`、`back` 改为 `false`，`suicide` 改为 `true`，
+并核对其它项与上表一致。配置编辑后可由真实服务端控制台执行 `lynxtools reload` 热重载；
+有 reload 权限的玩家也可执行。解析失败会保留上一份有效配置，缺失字段使用内嵌默认值。
+`console_reload` 仍为独立的真实控制台开关，不代表给予玩家 reload 权限。
+
+权限组由服主在 LuckPerms 配置，插件不创建组或修改权限数据库。建议继承与增量授权如下：
+
+| 组 | 继承 | 显式增加的节点（值为 true） |
+|---|---|---|
+| default | 无 | 使用上述默认策略 |
+| trusted | default | `lynxtools.command.home`、`lynxtools.command.sethome`、`lynxtools.command.back`、`lynxtools.command.suicide.keepinventory` |
+| friend | trusted | `lynxtools.command.fly`（自己） |
+| staff | friend | `lynxtools.command.fly.others`（他人） |
+| admin | staff | `lynxtools.command.gm` |
+
+未列出的管理能力不会随组名自动授予。普通组无需用显式 false 表示默认拒绝；
+已有显式 false 如需移除，应由服主在 LP 中处理，插件不会替通配符授权改变 LP 优先级。
+原版权限继续由现有 LP Auto-OP 管理，本版不接管 `/tp`、`/teleport`、`/op`，不添加权限桥接。
 
 ### 传送请求
 
@@ -125,7 +204,7 @@ warp/home/back 共用处理器，默认无等待、无冷却。数据库读取�
 ### 游戏模式与飞行
 
 `gm` 只修改自己：0/s 生存、1/c 创造、2/a 冒险、3/p 旁观。
-调用原生 `ServerPlayer.setGameMode`，成功只记录后台（UUID、名字、前后模式、请求及结果）；不发送聊天/ActionBar/标题/广播。
+调用原生 `ServerPlayer.setGameMode`，成功只向执行者发送可配置反馈，并记录后台（UUID、名字、前后模式、请求及结果）；不向其它玩家广播。
 原生同步包正常发送，不修改全服 gamerule 或日志开关。其他 Mod 拦截/改变模式时返回失败提示。
 
 自己与他人权限完全分离：`/fly <自己的名字>` 仍需 `lynxtools.command.fly`，不能用 `.fly.others` 绕过；只有自己权限不能操作他人，只有他人权限不能操作自己，Tab 按实际目标权限过滤。

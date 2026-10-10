@@ -24,7 +24,9 @@ class Runtime(val server: MinecraftServer) {
     val teleports=Teleports(this)
     val flights=Flights(this)
     val requests=Requests(this)
+    val vanishing=Vanishing(this)
     val names=net.ciyuan.lynxtools.tags.NameSync(this)
+    val presence=PresenceMessages(this)
     val warpNames=sortedSetOf<String>()
     val failedDeathWrites=mutableSetOf<UUID>()
     private val deathGeneration=mutableMapOf<UUID,Long>()
@@ -74,6 +76,7 @@ class Runtime(val server: MinecraftServer) {
         try { teleports.tick() } catch(e: Exception) { LOG.error("Teleport preparation failed",e); teleports.cancelAll("internal") }
         flights.tick()
         requests.tick()
+        vanishing.refresh()
         names.tick()
         if(tick % config.int("fly.recheck_ticks")==0L) server.playerList.players.forEach { refresh(it) }
     }
@@ -82,9 +85,10 @@ class Runtime(val server: MinecraftServer) {
         if(visibility.put(p.uuid,state)!=state) server.commands.sendCommands(p)
     }
     fun login(p: ServerPlayer) { flights.clear(p); if(p.isAlive) Suicides.clear(p); refresh(p); names.login(p) }
-    fun logout(p: ServerPlayer) { requests.cancelFor(p.uuid); teleports.clear(p.uuid); flights.clear(p); visibility.remove(p.uuid); flights.reload(); names.logout(p) }
-    fun respawn(p: ServerPlayer) { requests.cancelFor(p.uuid); flights.clear(p); teleports.cancel(p.uuid); refresh(p) }
+    fun logout(p: ServerPlayer) { requests.cancelFor(p.uuid); teleports.clear(p.uuid); flights.clear(p); visibility.remove(p.uuid); flights.reload(); names.logout(p); vanishing.logout(p) }
+    fun respawn(p: ServerPlayer) { requests.cancelFor(p.uuid); flights.clear(p); teleports.cancel(p.uuid); vanishing.end(p); refresh(p) }
     fun death(p: ServerPlayer) {
+        vanishing.end(p)
         requests.cancelFor(p.uuid); teleports.cancel(p.uuid); flights.clear(p)
         if(config.module("back")) {
             val place=place(p); val uuid=p.uuid; val name=p.gameProfile.name()
@@ -110,14 +114,14 @@ class Runtime(val server: MinecraftServer) {
             config=fresh.copy(values=fresh.values + restart.associateWith { config.values.getValue(it) })
             teleports.cancelAll("cancel_reload"); flights.reload()
             requests.clear(true)
-            names.reset()
+            vanishing.refresh(); names.reset()
             visibility.clear(); server.playerList.players.forEach { refresh(it) }
             messages.send(source,"reload_ok","success")
             if(restart.isNotEmpty()) messages.send(source,"restart_needed","warning","keys" to restart.joinToString(", "))
         }
     }
     fun stop() {
-        stopping=true; subscription.close(); requests.clear(false); teleports.cancelAll(); flights.stop(); deferred.clear()
+        stopping=true; subscription.close(); requests.clear(false); teleports.cancelAll(); flights.stop(); vanishing.stop(); deferred.clear()
         configWorker.shutdown()
         try { store.close() } catch(e: Exception) { LOG.error("LynxTools database shutdown failed; inspect database/WAL before backup",e) }
     }

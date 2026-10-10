@@ -14,6 +14,21 @@ class NameSync(private val app:Runtime) {
     private val seen=mutableMapOf<UUID,MutableMap<UUID,List<TagSpan>>>()
     private val invalid=mutableSetOf<UUID>()
     fun dirty(id:UUID) { pending.add(id) }
+    /** Current context, shared by optional nameplate sync and native connection announcements. */
+    fun label(p:ServerPlayer):List<TagSpan> {
+        val id=p.uuid
+        val api=LuckPermsProvider.get()
+        val user=api.userManager.getUser(id) ?: return listOf(TagSpan(p.gameProfile.name(),0xFFFFFF,0))
+        val meta=user.cachedData.getMetaData(api.contextManager.getQueryOptions(p))
+        return try {
+            val template=TagFormatting.template(meta.getMetaValue("name-gradient-start"),meta.getMetaValue("name-gradient-end"),app.config.string("nametags.name_format"))
+            TagFormatting.format(meta.prefix ?: "",p.gameProfile.name(),meta.suffix ?: "",template,app.config.int("nametags.max_characters"))
+                .also { invalid.remove(id) }
+        } catch(e:Exception) {
+            if(invalid.add(id)) Runtime.LOG.warn("Invalid LuckPerms nametag format uuid={}; using plain username",id,e)
+            listOf(TagSpan(p.gameProfile.name(),0xFFFFFF,0))
+        }
+    }
     fun login(p:ServerPlayer) { seen.remove(p.uuid); pending.addAll(app.server.playerList.players.map { it.uuid }) }
     fun logout(p:ServerPlayer) {
         pending.remove(p.uuid); rendered.remove(p.uuid); invalid.remove(p.uuid); seen.remove(p.uuid)
@@ -36,20 +51,12 @@ class NameSync(private val app:Runtime) {
             val id=pending.firstOrNull() ?: return
             pending.remove(id)
             val p=app.server.playerList.getPlayer(id) ?: return@repeat
-            val api=LuckPermsProvider.get()
-            val user=api.userManager.getUser(id) ?: return@repeat
-            val meta=user.cachedData.getMetaData(api.contextManager.getQueryOptions(p))
-            val spans=try {
-                TagFormatting.format(meta.prefix ?: "",p.gameProfile.name(),meta.suffix ?: "",app.config.string("nametags.name_format"),app.config.int("nametags.max_characters"))
-                    .also { invalid.remove(id) }
-            } catch(e:Exception) {
-                if(invalid.add(id)) Runtime.LOG.warn("Invalid LuckPerms nametag format uuid={}; using plain username",id,e)
-                listOf(TagSpan(p.gameProfile.name(),0xFFFFFF,0))
-            }
+            val spans=label(p)
             rendered[id]=spans
             for(viewer in viewers) {
                 val cache=seen.getOrPut(viewer.uuid) { mutableMapOf() }
-                if(cache[id]!=spans) { PacketDistributor.sendToPlayer(viewer,TagUpdate(id,spans)); cache[id]=spans }
+                val visibleSpans=if(app.vanishing.visible(viewer,p)) spans else emptyList()
+                if(cache[id]!=visibleSpans) { PacketDistributor.sendToPlayer(viewer,TagUpdate(id,visibleSpans)); cache[id]=visibleSpans }
             }
         }
     }

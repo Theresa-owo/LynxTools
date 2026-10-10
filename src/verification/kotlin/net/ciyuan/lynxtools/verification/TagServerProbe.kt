@@ -36,7 +36,9 @@ class TagServerProbe {
             hadPlayer=true; pending[p.uuid]=ticks+40
             val user=LuckPermsProvider.get().userManager.getUser(p.uuid)!!
             user.data().clear()
-            p.setGameMode(GameType.SURVIVAL)
+            user.data().add(PrefixNode.builder("[Lynx]",100).build())
+            user.data().add(net.luckperms.api.node.types.SuffixNode.builder("[❤]",100).build())
+            p.setGameMode(if(System.getProperty("lynxtools.verification.creative")=="true") GameType.CREATIVE else GameType.SURVIVAL)
             if(System.getProperty("lynxtools.verification.requests")=="true") requestAt=ticks+80
         }
         NeoForge.EVENT_BUS.addListener<PlayerEvent.PlayerLoggedOutEvent> { e ->

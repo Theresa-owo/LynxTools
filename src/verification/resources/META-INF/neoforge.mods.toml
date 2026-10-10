@@ -1,13 +1,13 @@
 license="GPL-3.0-or-later"
 [[mods]]
 modId="lynxtools_verification"
-version="1.0.0"
+version="1.0.4"
 displayName="LynxTools isolated inventory probes"
 [[mixins]]
 config="lynxtools-verification.mixins.json"
 [[dependencies.lynxtools_verification]]
 modId="lynxtools"
 type="required"
-versionRange="[1.0.0]"
+versionRange="[1.0.4]"
 ordering="AFTER"
 side="SERVER"

@@ -1,7 +1,7 @@
 license="GPL-3.0-or-later"
 [[mods]]
 modId="lynxtools"
-version="1.0.0"
+version="1.0.4"
 displayName="LynxTools"
 description="Server-side administration tools. No client installation required."
 [[mixins]]

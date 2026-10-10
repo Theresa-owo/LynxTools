@@ -1,0 +1,216 @@
+2026-10-10T22:04:00.977831100Z main WARN Advanced terminal features are not available in this environment
+[06:04:01] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 48ms
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 11.0.15 (DEDICATED_SERVER in PROD)
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: E:\Projects\Minecraft\LynxTools\.verification\server
+[06:04:01] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 70) in 11ms
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - libraries/net/neoforged/fancymodloader/earlydisplay/11.0.15/earlydisplay-11.0.15.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - libraries/net/neoforged/fancymodloader/loader/11.0.15/loader-11.0.15.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Not loading early display in headless mode.
+[06:04:01] [main/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Failed to find common Minecraft classes and resources on the classpath. Assuming we're launching production.
+[06:04:01] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 9 dependencies adding them to mods collection
+[06:04:01] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		LuckPerms 5.5.52 (luckperms)
+		LynxTools 1.0.4 (lynxtools)
+		LynxTools isolated inventory probes 1.0.4 (lynxtools_verification)
+		Minecraft 26.1.2 (minecraft)
+		NeoForge 26.1.2.115 (neoforge)
+[06:04:01] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/E:/Projects/Minecraft/LynxTools/.verification/server/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=SERVER
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > adventure-api-4.26.1.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > adventure-key-4.26.1.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > kotlin-stdlib-2.3.20.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > examination-string-1.3.0.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > examination-api-1.3.0.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > sqlite-jdbc-3.51.3.0.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - mods/LynxTools-1.0.4.jar > adventure-text-minimessage-4.26.1.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - ~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > net.neoforged.neoforge-coremods-26.1.2.115.jar
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - luckperms (jar(mods/LuckPerms-NeoForge-5.5.52.jar))
+ - lynxtools (jar(mods/LynxTools-1.0.4.jar))
+ - lynxtools_verification (jar(mods/LynxTools-verification-1.0.4.jar))
+ - minecraft (jar(~libraries/net/neoforged/minecraft-server-patched/26.1.2.115/minecraft-server-patched-26.1.2.115.jar))
+ - mixinextras.neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > mixinextras-neoforge-0.5.5.jar))
+ - neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[06:04:01] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 13ms
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.jna.Native in an unnamed module (file:/E:/Projects/Minecraft/LynxTools/.verification/server/libraries/net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+[06:04:01] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.joml.MemUtil$MemUtilUnsafe (file:/E:/Projects/Minecraft/LynxTools/.verification/server/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.joml.MemUtil$MemUtilUnsafe
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[06:04:04] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 26.1.2.115, for MC 26.1.2
+[06:04:04] [modloading-worker-0/INFO] [luckperms/]: Loading configuration...
+[06:04:04] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[06:04:04] [main/WARN] [ne.ne.ne.co.CommonHooks/WP]: The following mods have version differences that were not resolved:
+lynxtools (version 1.0.2 -> 1.0.4)
+lynxtools_verification (version 1.0.2 -> 1.0.4)
+Things may not work well.
+[06:04:05] [main/INFO] [minecraft/RecipeManager]: Loaded 1515 recipes
+[06:04:05] [main/INFO] [minecraft/AdvancementTree]: Loaded 1617 advancements
+[06:04:05] [main/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[06:04:05] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 26.1.2
+[06:04:05] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[06:04:05] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[06:04:05] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[06:04:05] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:25579
+2026-10-10T22:04:05.717975500Z Server thread ERROR An exception occurred processing Appender DebugFile
+org.apache.logging.log4j.core.appender.AppenderLoggingException: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.kqueue.Native
+	at org.apache.logging.log4j.core.config.AppenderControl.tryCallAppender(AppenderControl.java:164)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender0(AppenderControl.java:133)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppenderPreventRecursion(AppenderControl.java:124)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender(AppenderControl.java:88)
+	at org.apache.logging.log4j.core.config.LoggerConfig.callAppenders(LoggerConfig.java:711)
+	at org.apache.logging.log4j.core.config.LoggerConfig.processLogEvent(LoggerConfig.java:669)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:645)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:554)
+	at org.apache.logging.log4j.core.config.AwaitCompletionReliabilityStrategy.log(AwaitCompletionReliabilityStrategy.java:67)
+	at org.apache.logging.log4j.core.Logger.logMessage(Logger.java:173)
+	at org.apache.logging.slf4j.Log4jLogger.log(Log4jLogger.java:374)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.log(LocationAwareSlf4JLogger.java:46)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.debug(LocationAwareSlf4JLogger.java:129)
+	at io.netty.channel.kqueue.KQueue.<clinit>(KQueue.java:54)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.network.EventLoopGroupHolder.remote(EventLoopGroupHolder.java:59)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.network.ServerConnectionListener.startTcpServerListener(ServerConnectionListener.java:57)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:261)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:735)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:300)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.kqueue.Native
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:547)
+	at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:212)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.lambda$static$1(ThrowableExtendedStackTraceRenderer.java:196)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.loadClass(ThrowableExtendedStackTraceRenderer.java:180)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.createClassResourceInfoByName(ThrowableExtendedStackTraceRenderer.java:166)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.ofThrowable(ThrowableExtendedStackTraceRenderer.java:96)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.access$000(ThrowableExtendedStackTraceRenderer.java:81)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.createContext(ThrowableExtendedStackTraceRenderer.java:43)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.createContext(ThrowableExtendedStackTraceRenderer.java:34)
+	at org.apache.logging.log4j.core.pattern.ThrowableStackTraceRenderer.renderThrowable(ThrowableStackTraceRenderer.java:55)
+	at org.apache.logging.log4j.core.pattern.ThrowablePatternConverter.format(ThrowablePatternConverter.java:130)
+	at org.apache.logging.log4j.core.layout.PatternLayout$NoFormatPatternSerializer.toSerializable(PatternLayout.java:354)
+	at org.apache.logging.log4j.core.layout.PatternLayout.toText(PatternLayout.java:251)
+	at org.apache.logging.log4j.core.layout.PatternLayout.encode(PatternLayout.java:237)
+	at org.apache.logging.log4j.core.layout.PatternLayout.encode(PatternLayout.java:57)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.directEncodeEvent(AbstractOutputStreamAppender.java:227)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.tryAppend(AbstractOutputStreamAppender.java:220)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.append(AbstractOutputStreamAppender.java:211)
+	at org.apache.logging.log4j.core.appender.RollingRandomAccessFileAppender.append(RollingRandomAccessFileAppender.java:275)
+	at org.apache.logging.log4j.core.config.AppenderControl.tryCallAppender(AppenderControl.java:160)
+	... 19 more
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Only supported on OSX/BSD [in thread "Server thread"]
+	at io.netty.channel.kqueue.Native.loadNativeLibrary(Native.java:159)
+	at io.netty.channel.kqueue.Native.<clinit>(Native.java:76)
+	at io.netty.channel.kqueue.KQueue.<clinit>(KQueue.java:38)
+	... 6 more
+
+2026-10-10T22:04:05.719983100Z Server thread ERROR An exception occurred processing Appender DebugFile
+org.apache.logging.log4j.core.appender.AppenderLoggingException: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.epoll.Native
+	at org.apache.logging.log4j.core.config.AppenderControl.tryCallAppender(AppenderControl.java:164)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender0(AppenderControl.java:133)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppenderPreventRecursion(AppenderControl.java:124)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender(AppenderControl.java:88)
+	at org.apache.logging.log4j.core.config.LoggerConfig.callAppenders(LoggerConfig.java:711)
+	at org.apache.logging.log4j.core.config.LoggerConfig.processLogEvent(LoggerConfig.java:669)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:645)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:554)
+	at org.apache.logging.log4j.core.config.AwaitCompletionReliabilityStrategy.log(AwaitCompletionReliabilityStrategy.java:67)
+	at org.apache.logging.log4j.core.Logger.logMessage(Logger.java:173)
+	at org.apache.logging.slf4j.Log4jLogger.log(Log4jLogger.java:374)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.log(LocationAwareSlf4JLogger.java:46)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.debug(LocationAwareSlf4JLogger.java:129)
+	at io.netty.channel.epoll.Epoll.<clinit>(Epoll.java:66)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.network.EventLoopGroupHolder.remote(EventLoopGroupHolder.java:63)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.network.ServerConnectionListener.startTcpServerListener(ServerConnectionListener.java:57)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:261)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:735)
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:300)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.epoll.Native
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:547)
+	at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:212)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.lambda$static$1(ThrowableExtendedStackTraceRenderer.java:196)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.loadClass(ThrowableExtendedStackTraceRenderer.java:180)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.createClassResourceInfoByName(ThrowableExtendedStackTraceRenderer.java:166)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.ofThrowable(ThrowableExtendedStackTraceRenderer.java:96)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer$ExtendedContext.access$000(ThrowableExtendedStackTraceRenderer.java:81)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.createContext(ThrowableExtendedStackTraceRenderer.java:43)
+	at org.apache.logging.log4j.core.pattern.ThrowableExtendedStackTraceRenderer.createContext(ThrowableExtendedStackTraceRenderer.java:34)
+	at org.apache.logging.log4j.core.pattern.ThrowableStackTraceRenderer.renderThrowable(ThrowableStackTraceRenderer.java:55)
+	at org.apache.logging.log4j.core.pattern.ThrowablePatternConverter.format(ThrowablePatternConverter.java:130)
+	at org.apache.logging.log4j.core.layout.PatternLayout$NoFormatPatternSerializer.toSerializable(PatternLayout.java:354)
+	at org.apache.logging.log4j.core.layout.PatternLayout.toText(PatternLayout.java:251)
+	at org.apache.logging.log4j.core.layout.PatternLayout.encode(PatternLayout.java:237)
+	at org.apache.logging.log4j.core.layout.PatternLayout.encode(PatternLayout.java:57)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.directEncodeEvent(AbstractOutputStreamAppender.java:227)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.tryAppend(AbstractOutputStreamAppender.java:220)
+	at org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender.append(AbstractOutputStreamAppender.java:211)
+	at org.apache.logging.log4j.core.appender.RollingRandomAccessFileAppender.append(RollingRandomAccessFileAppender.java:275)
+	at org.apache.logging.log4j.core.config.AppenderControl.tryCallAppender(AppenderControl.java:160)
+	... 19 more
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Only supported on Linux [in thread "Server thread"]
+	at io.netty.channel.epoll.Native.loadNativeLibrary(Native.java:328)
+	at io.netty.channel.epoll.Native.<clinit>(Native.java:96)
+	at io.netty.channel.epoll.Epoll.<clinit>(Epoll.java:42)
+	... 6 more
+
+[06:04:05] [Server thread/INFO] [minecraft/MinecraftServer]:         __    
+[06:04:05] [Server thread/INFO] [minecraft/MinecraftServer]:   |    |__)   LuckPerms v5.5.52
+[06:04:05] [Server thread/INFO] [minecraft/MinecraftServer]:   |___ |      Running on NeoForge
+[06:04:05] [Server thread/INFO] [minecraft/MinecraftServer]: 
+[06:04:05] [Server thread/INFO] [luckperms/]: Loading storage provider... [H2]
+[06:04:05] [Server thread/INFO] [luckperms/]: Loading internal permission managers...
+[06:04:05] [Server thread/INFO] [luckperms/]: Performing initial data load...
+[06:04:05] [Server thread/INFO] [luckperms/]: Successfully enabled. (took 1375ms)
+[06:04:05] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "validation-world"
+[06:04:06] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[06:04:06] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 100%
+[06:04:06] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 12 ms
+[06:04:06] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.358s)! For help, type "help"
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[06:04:06] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[06:04:06] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler luckperms:permission_handler
+[06:04:06] [Server thread/INFO] [LynxTools/]: 
+ _
+| |   _   _ _ __ __  __
+| |  | | | | '_ \\ \/ /
+| |__| |_| | | | |>  <
+|_____\__, |_| |_/_/\_\
+      |___/
+[06:04:06] [Server thread/INFO] [LynxTools/]: LynxTools ready: Minecraft 26.1.2 / NeoForge 26.1.2.115, online-mode=true, schema=1
+[06:04:06] [Server thread/INFO] [LynxTools/]: Game mode actor=e9d4102a-8b78-412c-9b33-92eaba89a71b name=VanishActor from=SURVIVAL requested=CREATIVE result=CREATIVE accepted=true
+[06:04:06] [Server thread/INFO] [LynxTools/]: Player left uuid=e9d4102a-8b78-412c-9b33-92eaba89a71b name=VanishActor
+[06:04:06] [Server thread/INFO] [LynxTools/]: Vanish actor=e9d4102a-8b78-412c-9b33-92eaba89a71b enabled=true
+[06:04:06] [Server thread/INFO] [LynxTools/]: Player left uuid=e9d4102a-8b78-412c-9b33-92eaba89a71b name=VanishActor
+[06:04:06] [Server thread/INFO] [LynxTools/]: Vanish actor=e9d4102a-8b78-412c-9b33-92eaba89a71b enabled=true
+[06:04:06] [Server thread/INFO] [LynxToolsVanish/]: VANISH_PROBE_PASSED: creative-only, actor-only gm/vanish feedback, permission transitions, native broadcast visibility, per-viewer TAB without shared packet mutation, player-name suggestions, scoped sound/particles, silent chest/shulker counts
+[06:04:11] [Server thread/INFO] [luckperms/]: Starting shutdown process...
+[06:04:11] [Server thread/INFO] [luckperms/]: Closing storage...
+[06:04:11] [Server thread/INFO] [luckperms/]: Goodbye!
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[06:04:11] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[06:04:11] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Closing FML Loader 45dcf72e
+[06:04:11] [main/INFO] [ne.ne.fm.ModLoader/]: Clearing ModLoader

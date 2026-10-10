@@ -81,13 +81,28 @@ class StorageConfigTest {
     }
     @Test fun `configuration defaults are safe and invalid edits fail`() {
         val initial=settings()
-        assertFalse(initial.bool("permissions.gm")); assertFalse(initial.bool("permissions.fly")); assertTrue(initial.bool("permissions.home"))
+        val allowed = setOf("warp", "suicide", "tpr", "tpa", "tpd")
+        initial.values.keys.filter { it.startsWith("permissions.") && it != "permissions.console_reload" }.forEach { key ->
+            assertEquals(key.removePrefix("permissions.") in allowed, initial.bool(key), key)
+        }
         val path=root.resolve("plugins/LynxTools/Config.toml")
         Files.writeString(path,"[teleport]\nsearch_radius = 999\n")
         assertThrows(IllegalArgumentException::class.java) { settings() }
         assertEquals(8,initial.int("teleport.search_radius"))
         Files.writeString(path,"[permissions]\ngmm = true\n")
         assertThrows(IllegalArgumentException::class.java) { settings() }
+    }
+    @Test fun `existing permission configuration is preserved and missing keys use new defaults`() {
+        settings()
+        val path=root.resolve("plugins/LynxTools/Config.toml")
+        val existing="[permissions]\nhome = true\nsuicide = false\n"
+        Files.writeString(path,existing)
+        val loaded=settings()
+        assertTrue(loaded.bool("permissions.home"))
+        assertFalse(loaded.bool("permissions.suicide"))
+        assertFalse(loaded.bool("permissions.sethome"))
+        assertTrue(loaded.bool("permissions.tpr"))
+        assertEquals(existing,Files.readString(path))
     }
     @Test fun `language interpolation is literal and rejects unknown placeholders`() {
         val s=settings()

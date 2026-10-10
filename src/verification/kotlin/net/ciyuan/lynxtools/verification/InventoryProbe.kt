@@ -33,9 +33,10 @@ class InventoryProbe {
     private var itemDrops=0
     private var ticks=0
     init {
+        if(System.getProperty("lynxtools.verification.vanish")=="true") VanishProbe()
         if(System.getProperty("lynxtools.verification.tags")=="true") TagServerProbe()
         if(System.getProperty("lynxtools.verification.lifecycle")=="true") LifecycleProbe()
-        NeoForge.EVENT_BUS.addListener<ServerStartedEvent> { event -> if(System.getProperty("lynxtools.verification.tags")!="true") run(event) }
+        NeoForge.EVENT_BUS.addListener<ServerStartedEvent> { event -> if(System.getProperty("lynxtools.verification.tags")!="true" && System.getProperty("lynxtools.verification.vanish")!="true") run(event) }
         NeoForge.EVENT_BUS.addListener<EntityJoinLevelEvent> { event -> if(measuring && event.entity is ItemEntity) itemDrops++ }
         NeoForge.EVENT_BUS.addListener<ServerTickEvent.Post> { event ->
             if(System.getProperty("lynxtools.verification.lifecycle")!="true" && System.getProperty("lynxtools.verification.autoStop")=="true" && ++ticks==100) event.server.halt(false)
@@ -97,7 +98,9 @@ class InventoryProbe {
             val user=api.userManager.loadUser(p.uuid).join()
             val settings=Settings.load(Path.of("."))
             val permissions=Permissions(api) { settings }
-            check(permissions.command(p,"home"))
+            check(!permissions.command(p,"home"))
+            check(permissions.command(p,"warp"))
+            check(permissions.command(p,"suicide"))
             check(!permissions.command(p,"gm"))
             val dispatcher=server.commands.dispatcher
             val source=p.createCommandSourceStack()
@@ -109,11 +112,13 @@ class InventoryProbe {
             check(permissions.command(p,"gm"))
             check(dispatcher.root.getChild("gm").canUse(source))
             server.commands.performPrefixedCommand(source,"gm c")
-            check(p.isCreative && p.messages.isEmpty())
+            check(p.isCreative && p.messages.any { it.contains("你的游戏模式已设为创造") })
             user.data().remove(grant)
             check(!permissions.command(p,"gm"))
             user.data().add(Node.builder("lynxtools.command.home").value(false).build())
             check(!permissions.command(p,"home"))
+            user.data().add(Node.builder("lynxtools.command.warp").value(false).build())
+            check(!permissions.command(p,"warp"))
             user.data().add(Node.builder("lynxtools.command.gm").value(true).withContext("lynxtools-probe","unmatched").build())
             check(!permissions.command(p,"gm"))
             user.data().add(Node.builder("lynxtools.command.suicide").value(true).build())
@@ -127,7 +132,7 @@ class InventoryProbe {
             server.commands.performPrefixedCommand(server.createCommandSourceStack(),"gm 1")
             server.commands.performPrefixedCommand(server.createCommandSourceStack(),"suicide")
             server.commands.performPrefixedCommand(server.createCommandSourceStack(),"lynxtools reload")
-            log.info("COMMAND_PROBES_PASSED: LuckPerms grant/deny/context, hidden commands, gm silent, KeepInventory permission and gamerule-aware Tab, redundant flag rejected")
+            log.info("COMMAND_PROBES_PASSED: LuckPerms grant/deny/context, hidden commands, gm actor feedback, KeepInventory permission and gamerule-aware Tab, redundant flag rejected")
         } catch(e: Throwable) { log.error("INVENTORY_PROBES_FAILED",e) }
         finally { measuring=false; rules.set(GameRules.KEEP_INVENTORY,original,server) }
     }

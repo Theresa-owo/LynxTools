@@ -35,11 +35,11 @@ class Commands(private val runtime: () -> Runtime?) {
                             }
                             "gm" -> if(parts.size==1) listOf("0","1","2","3","s","c","a","p") else emptyList()
                             "fly" -> if(parts.size==1 && p!=null) app.server.playerList.players.filter {
-                                app.permissions.command(p,if(it.uuid==p.uuid) "fly" else "fly_others")
+                                app.vanishing.visible(p,it) && app.permissions.command(p,if(it.uuid==p.uuid) "fly" else "fly_others")
                             }.map { it.gameProfile.name() } else emptyList()
                             "lynxtools" -> if(parts.size==1) listOf("reload") else emptyList()
                             "suicide" -> if(parts.size==1 && p!=null && !p.level().gameRules.get(GameRules.KEEP_INVENTORY) && app.permissions.command(p,"suicide_keepinventory")) listOf("KeepInventory") else emptyList()
-                            "tpr" -> if(parts.size==1 && p!=null) app.server.playerList.players.filter { it!==p && app.teleports.state(it) }.map { it.gameProfile.name() } else emptyList()
+                            "tpr" -> if(parts.size==1 && p!=null) app.server.playerList.players.filter { it!==p && app.vanishing.visible(p,it) && app.teleports.state(it) }.map { it.gameProfile.name() } else emptyList()
                             "tpa","tpd" -> if(parts.size==1 && p!=null) app.requests.suggestions(p) else if(command=="tpd" && parts.size==2) listOf("ignore") else emptyList()
                             else -> emptyList()
                         }
@@ -119,12 +119,14 @@ class Commands(private val runtime: () -> Runtime?) {
                     val actual=p.gameMode.gameModeForPlayer
                     Runtime.LOG.info("Game mode actor={} name={} from={} requested={} result={} accepted={}",p.uuid,p.gameProfile.name(),before,mode,actual,changed)
                     if(!changed || actual!=mode) app.messages.send(p,"state","error")
+                    else app.messages.send(p,"gm_changed","success","mode" to app.config.language.text("mode_${mode.name.lowercase(Locale.ROOT)}"))
                     app.flights.reconcile(p)
+                    app.vanishing.refresh()
                 }
                 "fly" -> {
                     if(args.size>1) return usage()
                     val target=if(args.isEmpty()) p else app.server.playerList.getPlayerByName(args[0])
-                    if(target==null) { app.messages.send(p,"missing_player","error","name" to args[0]); return 0 }
+                    if(target==null || !app.vanishing.visible(p,target)) { app.messages.send(p,"missing_player","error","name" to args[0]); return 0 }
                     val node=if(target.uuid==p.uuid) "fly" else "fly_others"
                     if(!app.permissions.command(p,node)) { app.messages.send(p,"denied","error"); return 0 }
                     app.flights.toggle(p,target)
@@ -135,10 +137,11 @@ class Commands(private val runtime: () -> Runtime?) {
                     if(args.isNotEmpty() && !app.permissions.command(p,"suicide_keepinventory")) { app.messages.send(p,"denied","error"); return 0 }
                     Suicides.execute(app,p,args.isNotEmpty())
                 }
+                "vanish" -> { if(args.isNotEmpty()) return usage(); app.vanishing.toggle(p) }
                 "tpr" -> {
                     if(args.size!=1) return usage()
                     val target=app.server.playerList.getPlayerByName(args[0])
-                    if(target==null) { app.messages.send(p,"missing_player","error","name" to args[0]); return 0 }
+                    if(target==null || !app.vanishing.visible(p,target)) { app.messages.send(p,"missing_player","error","name" to args[0]); return 0 }
                     app.requests.send(p,target)
                 }
                 "tpa" -> { if(args.size>1) return usage(); app.requests.reply(p,args.firstOrNull(),true) }
@@ -157,7 +160,7 @@ class Commands(private val runtime: () -> Runtime?) {
         return input.lowercase(Locale.ROOT)
     }
     companion object {
-        val nodes=linkedMapOf("warp" to "warp","setwarp" to "setwarp","home" to "home","sethome" to "sethome","back" to "back","gm" to "gm","fly" to "fly","suicide" to "suicide","tpr" to "tpr","tpa" to "tpa","tpd" to "tpd","lynxtools" to "reload")
+        val nodes=linkedMapOf("warp" to "warp","setwarp" to "setwarp","home" to "home","sethome" to "sethome","back" to "back","gm" to "gm","fly" to "fly","vanish" to "vanish","suicide" to "suicide","tpr" to "tpr","tpa" to "tpa","tpd" to "tpd","lynxtools" to "reload")
         val aliases=mapOf("tprequest" to "tpr","tpaccept" to "tpa","tpdecline" to "tpd")
     }
 }

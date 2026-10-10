@@ -9,6 +9,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent
 import net.neoforged.neoforge.event.CommandEvent
 import net.neoforged.neoforge.event.server.ServerStartingEvent
 import net.neoforged.neoforge.event.server.ServerStoppingEvent
+import net.neoforged.neoforge.event.server.ServerStoppedEvent
 import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
@@ -22,8 +23,9 @@ class LynxTools(modBus:IEventBus) {
     private var runtime: Runtime? = null
     private val commands=Commands { runtime }
     init { NeoForge.EVENT_BUS.register(this); modBus.addListener<RegisterPayloadHandlersEvent> { e -> e.registrar("1").optional().playToClient(TagUpdate.TYPE,TagUpdate.CODEC) } }
-    @SubscribeEvent fun starting(e: ServerStartingEvent) { runtime=Runtime(e.server); PlayerDeaths.confirmed={ p -> runtime?.death(p) } }
-    @SubscribeEvent fun stopping(e: ServerStoppingEvent) { PlayerDeaths.confirmed=null; runtime?.stop(); runtime=null }
+    @SubscribeEvent fun starting(e: ServerStartingEvent) { runtime=Runtime(e.server); PlayerDeaths.confirmed={ p -> runtime?.death(p) }; PresenceHooks.handler={ p,joining -> runtime?.presence?.onNative(p,joining) ?: false } }
+    @SubscribeEvent fun stopping(e: ServerStoppingEvent) { PlayerDeaths.confirmed=null; runtime?.stop() }
+    @SubscribeEvent fun stopped(e: ServerStoppedEvent) { runtime=null; PresenceHooks.handler=null }
     @SubscribeEvent fun commands(e: RegisterCommandsEvent) { commands.register(e.dispatcher) }
     @SubscribeEvent fun command(e: CommandEvent) { commands.intercept(e) }
     @SubscribeEvent fun tick(e: ServerTickEvent.Post) { runtime?.tick() }

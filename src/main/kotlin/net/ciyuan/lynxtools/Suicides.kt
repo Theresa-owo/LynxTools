@@ -12,7 +12,7 @@ object Suicides {
         if(keep) player.persistentData.putBoolean(KEY,true)
         try {
             // Exactly the native /kill path, including generic_kill damage and NeoForge death hooks.
-            player.kill(player.level())
+            ActorFeedback.only(player.uuid) { player.kill(player.level()) }
             // Native ServerPlayer.die marks the client unloaded only after the cancellable death hook.
             // Health can already be zero even when another mod cancels that hook.
             val died=!player.isAlive && !player.connection.hasClientLoaded()

@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "net.ciyuan.lynxtools.mixin",
   "compatibilityLevel": "JAVA_25",
-  "server": ["PlayerKeepInventoryMixin", "ServerPlayerKeepInventoryMixin"],
+  "server": ["PlayerKeepInventoryMixin", "ServerPlayerKeepInventoryMixin", "ServerPlayerVanishMixin", "PlayerInfoAccessor", "VanishPacketMixin", "VanishSuggestionsMixin", "VanishPlayerMixin", "VanishSoundMixin", "VanishTickMixin", "VanishActionMixin", "VanishContainerMixin", "VanishShulkerMixin", "VanishChatMixin", "VanishCommandMixin", "JoinMessageMixin", "QuitMessageMixin"],
   "injectors": {"defaultRequire": 1},
   "mixinextras": {"minVersion": "0.5.0"}
 }

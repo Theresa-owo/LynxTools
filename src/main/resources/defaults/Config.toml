@@ -16,9 +16,12 @@ startup_banner = true # 启动时输出 Lynx ASCII 字符画；需要重启
 enabled = false # 可选 LynxTags 客户端协议；不创建/改写 scoreboard team
 refresh_ticks = 20 # 1..1200；当前上下文前后缀更新周期，LP 事件另行触发
 updates_per_tick = 8 # 1..64；每 tick 最多重新计算的玩家数
-name_format = "<gradient:#42D9E8:#B58AFF><name></gradient>" # <name> 是安全纯文本占位符
+name_format = "<gradient:#42D9E8:#B58AFF><label></gradient>" # <label> = 前缀 名字 后缀，自动间隔，整行一次渐变
 max_characters = 128 # 16..256，包含前缀/用户名/后缀；超过时截断
 # LP prefix/suffix 使用 MiniMessage 的颜色、渐变、装饰和 reset 标签。
+# <label> 提取前后缀纯文本并统一格式；旧 <name> 模式保留前后缀自己的样式与间隔。
+# 当前 LP 上下文的 name-gradient-start/end 同时为 #RRGGBB 时，优先用于整行渐变。
+# 缺失/无效端点回退 name_format；<label> 清理前后缀旧式 &#RRGGBB、&r 等控制码。
 # 不执行 click/hover/selector 等交互标签，不读取或修改 TAB/chat/team。
 
 [modules]
@@ -29,20 +32,28 @@ gm = true
 fly = true
 suicide = true
 requests = true
+vanish = true
+presence = true # 接管原版加入/退出消息；关闭整个模块恢复原版广播
+
+[presence]
+join = true # false = 静音加入广播；热更新
+quit = true # false = 静音退出广播；隐身退出仅同 vanish 权限玩家可见
 
 # LuckPerms 必需。以下仅用于 LP 返回 UNDEFINED 时；明确 false 始终优先。
 # 不使用 OP 等级。节点固定，默认策略可重载。
+# 普通玩家仅默认开放 warp、suicide、tpr、tpa、tpd；其它玩家能力由 LP 显式授权。
 [permissions]
 warp = true
 setwarp = false
-home = true
-sethome = true
-back = true
+home = false
+sethome = false
+back = false
 gm = false
 fly = false
 fly_others = false
+vanish = false
 reload = false
-suicide = false
+suicide = true
 suicide_keepinventory = false
 tpr = true
 tpa = true
