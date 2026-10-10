@@ -1,0 +1,1 @@
+{"required":true,"minVersion":"0.8","package":"net.ciyuan.lynxtools.verification.mixin","compatibilityLevel":"JAVA_25","server":["RuntimeCapture"],"injectors":{"defaultRequire":1}}

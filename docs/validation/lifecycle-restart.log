@@ -1,0 +1,110 @@
+[1110月2026 04:18:04.663] [main/INFO] [net.neoforged.fml.startup.Entrypoint/]: JVM Uptime at startup: 69ms
+[1110月2026 04:18:04.668] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Starting FancyModLoader version 11.0.15 (DEDICATED_SERVER in PROD)
+[1110月2026 04:18:04.669] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Game directory: E:\Projects\Minecraft\LynxTools\.verification\server
+[1110月2026 04:18:04.699] [main/INFO] [net.neoforged.fml.loading.EarlyServiceDiscovery/]: Found 2 early service jars (out of 70) in 14ms
+[1110月2026 04:18:04.699] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Loading FML Early Services:
+[1110月2026 04:18:04.699] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - libraries/net/neoforged/fancymodloader/earlydisplay/11.0.15/earlydisplay-11.0.15.jar
+[1110月2026 04:18:04.700] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - libraries/net/neoforged/fancymodloader/loader/11.0.15/loader-11.0.15.jar
+[1110月2026 04:18:04.703] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Not loading early display in headless mode.
+[1110月2026 04:18:04.711] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.GameLocator/]: Failed to find common Minecraft classes and resources on the classpath. Assuming we're launching production.
+[1110月2026 04:18:04.871] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 9 dependencies adding them to mods collection
+[1110月2026 04:18:04.872] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		LuckPerms 5.5.52 (luckperms)
+		LynxTools 1.0.0 (lynxtools)
+		LynxTools isolated inventory probes 1.0.0 (lynxtools_verification)
+		Minecraft 26.1.2 (minecraft)
+		NeoForge 26.1.2.115 (neoforge)
+[1110月2026 04:18:04.937] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/E:/Projects/Minecraft/LynxTools/.verification/server/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=SERVER
+[1110月2026 04:18:04.952] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Loading FML Plugins:
+[1110月2026 04:18:04.952] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > adventure-api-4.26.1.jar
+[1110月2026 04:18:04.952] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > adventure-key-4.26.1.jar
+[1110月2026 04:18:04.953] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > kotlin-stdlib-2.3.20.jar
+[1110月2026 04:18:04.953] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > examination-string-1.3.0.jar
+[1110月2026 04:18:04.954] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > examination-api-1.3.0.jar
+[1110月2026 04:18:04.954] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > sqlite-jdbc-3.51.3.0.jar
+[1110月2026 04:18:04.954] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.0.jar > adventure-text-minimessage-4.26.1.jar
+[1110月2026 04:18:04.955] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - ~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > net.neoforged.neoforge-coremods-26.1.2.115.jar
+[1110月2026 04:18:05.011] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Building game content classloader:
+ - luckperms (jar(mods/LuckPerms-NeoForge-5.5.52.jar))
+ - lynxtools (jar(mods/LynxTools-1.0.0.jar))
+ - lynxtools_verification (jar(mods/LynxTools-verification-1.0.0.jar))
+ - minecraft (jar(~libraries/net/neoforged/minecraft-server-patched/26.1.2.115/minecraft-server-patched-26.1.2.115.jar))
+ - mixinextras.neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > mixinextras-neoforge-0.5.5.jar))
+ - neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[1110月2026 04:18:05.020] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Built game content classloader in 15ms
+[1110月2026 04:18:05.559] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[1110月2026 04:18:07.765] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 26.1.2.115, for MC 26.1.2
+[1110月2026 04:18:08.025] [modloading-worker-0/INFO] [luckperms/]: Loading configuration...
+[1110月2026 04:18:08.147] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[1110月2026 04:18:08.900] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1515 recipes
+[1110月2026 04:18:08.908] [main/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1617 advancements
+[1110月2026 04:18:08.909] [main/INFO] [net.neoforged.neoforge.common.crafting.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[1110月2026 04:18:08.978] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 26.1.2
+[1110月2026 04:18:08.978] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[1110月2026 04:18:08.978] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[1110月2026 04:18:08.978] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[1110月2026 04:18:09.004] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on 127.0.0.1:25579
+[1110月2026 04:18:09.114] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:         __    
+[1110月2026 04:18:09.114] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:   |    |__)   LuckPerms v5.5.52
+[1110月2026 04:18:09.114] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:   |___ |      Running on NeoForge
+[1110月2026 04:18:09.114] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: 
+[1110月2026 04:18:09.129] [Server thread/INFO] [luckperms/]: Loading storage provider... [H2]
+[1110月2026 04:18:09.226] [Server thread/INFO] [luckperms/]: Loading internal permission managers...
+[1110月2026 04:18:09.239] [Server thread/INFO] [luckperms/]: Performing initial data load...
+[1110月2026 04:18:09.253] [Server thread/INFO] [luckperms/]: Successfully enabled. (took 1297ms)
+[1110月2026 04:18:09.253] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "validation-world"
+[1110月2026 04:18:09.435] [Server thread/INFO] [net.minecraft.server.level.progress.LoggingLevelLoadListener/]: Loading 0 persistent chunks...
+[1110月2026 04:18:09.435] [Server thread/INFO] [net.minecraft.server.level.progress.LoggingLevelLoadListener/]: Preparing spawn area: 100%
+[1110月2026 04:18:09.446] [Server thread/INFO] [net.minecraft.server.level.progress.LoggingLevelLoadListener/]: Time elapsed: 12 ms
+[1110月2026 04:18:09.447] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (0.374s)! For help, type "help"
+[1110月2026 04:18:09.448] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[1110月2026 04:18:09.474] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[1110月2026 04:18:09.478] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[1110月2026 04:18:09.486] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1110月2026 04:18:09.486] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1110月2026 04:18:09.486] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1110月2026 04:18:09.486] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1110月2026 04:18:09.503] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler luckperms:permission_handler
+[1110月2026 04:18:09.699] [Server thread/INFO] [LynxTools/]: 
+ _
+| |   _   _ _ __ __  __
+| |  | | | | '_ \\ \/ /
+| |__| |_| | | | |>  <
+|_____\__, |_| |_/_/\_\
+      |___/
+[1110月2026 04:18:09.699] [Server thread/INFO] [LynxTools/]: LynxTools ready: Minecraft 26.1.2 / NeoForge 26.1.2.115, online-mode=true, schema=1
+[1110月2026 04:18:09.764] [Server thread/INFO] [LynxToolsVerification/]: INVENTORY_PROBES_PASSED: per-player keep, native drops, armor/offhand, XP, restore, marker cleanup, unchanged global rule
+[1110月2026 04:18:09.793] [Server thread/INFO] [LynxTools/]: Game mode actor=3c8047ad-f70e-4cd7-bcd2-510994e153a3 name=CommandProbe from=SURVIVAL requested=CREATIVE result=CREATIVE accepted=true
+[1110月2026 04:18:09.796] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 此命令只能由玩家执行。
+[1110月2026 04:18:09.797] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 此命令只能由玩家执行。
+[1110月2026 04:18:09.797] [Server thread/INFO] [LynxToolsVerification/]: COMMAND_PROBES_PASSED: LuckPerms grant/deny/context, hidden commands, gm silent, KeepInventory permission and gamerule-aware Tab, redundant flag rejected
+[1110月2026 04:18:09.809] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 配置与语言已重载。
+[1110月2026 04:18:09.825] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare two real dimensions
+[1110月2026 04:18:10.011] [Server thread/INFO] [LynxToolsLifecycle/]: PASS chunks loaded
+[1110月2026 04:18:10.081] [Server thread/INFO] [LynxToolsLifecycle/]: PASS players online via test registration; no authenticated client
+[1110月2026 04:18:10.117] [Server thread/INFO] [LynxToolsLifecycle/]: PASS read persisted death in second JVM
+[1110月2026 04:18:10.244] [Server thread/INFO] [LynxToolsLifecycle/]: PASS death recovered after JVM restart
+[1110月2026 04:18:10.254] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1110月2026 04:18:10.276] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1110月2026 04:18:10.346] [Server thread/INFO] [LynxToolsLifecycle/]: PASS no flight after new JVM login
+[1110月2026 04:18:10.404] [Server thread/INFO] [LynxToolsLifecycle/]: LIFECYCLE_RESULT success=true restart=true completed=8
+[1110月2026 04:18:10.404] [Server thread/INFO] [LynxToolsLifecycle/]: PASS finish
+[1110月2026 04:18:10.438] [Server thread/INFO] [luckperms/]: Starting shutdown process...
+[1110月2026 04:18:10.440] [Server thread/INFO] [luckperms/]: Closing storage...
+[1110月2026 04:18:10.448] [Server thread/INFO] [luckperms/]: Goodbye!
+[1110月2026 04:18:10.450] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[1110月2026 04:18:10.450] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[1110月2026 04:18:10.450] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[1110月2026 04:18:10.483] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[1110月2026 04:18:10.536] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[1110月2026 04:18:10.538] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[1110月2026 04:18:10.555] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1110月2026 04:18:10.555] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1110月2026 04:18:10.555] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1110月2026 04:18:10.555] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1110月2026 04:18:10.574] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Closing FML Loader 78c042a0
+[1110月2026 04:18:10.576] [main/INFO] [net.neoforged.fml.ModLoader/]: Clearing ModLoader

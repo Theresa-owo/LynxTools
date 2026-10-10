@@ -1,0 +1,12 @@
+[1110月2026 02:47:18.820] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1110月2026 02:47:19.111] [Server thread/INFO] [LynxTools/]: LynxTools ready: Minecraft 26.1.2 / NeoForge 26.1.2.115, online-mode=true, schema=1
+[1110月2026 02:47:19.223] [Server thread/INFO] [LynxToolsVerification/]: INVENTORY_PROBES_PASSED: per-player keep, native drops, armor/offhand, XP, restore, marker cleanup, unchanged global rule
+[1110月2026 02:47:19.266] [Server thread/INFO] [LynxTools/]: Game mode actor=2f089972-bc51-4897-a021-dbd321b608da name=CommandProbe from=SURVIVAL requested=CREATIVE result=CREATIVE accepted=true
+[1110月2026 02:47:19.273] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 此命令只能由玩家执行。
+[1110月2026 02:47:19.273] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 此命令只能由玩家执行。
+[1110月2026 02:47:19.274] [Server thread/INFO] [LynxToolsVerification/]: COMMAND_PROBES_PASSED: LuckPerms grant/deny/context, hidden commands, gm silent, KeepInventory permission and gamerule-aware Tab, redundant flag rejected
+[1110月2026 02:47:19.292] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: LynxTools › 配置与语言已重载。
+[1110月2026 02:47:24.303] [Server thread/INFO] [luckperms/]: Goodbye!
+[1110月2026 02:47:24.304] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[1110月2026 02:47:24.352] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1110月2026 02:47:24.369] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Closing FML Loader 19feba08

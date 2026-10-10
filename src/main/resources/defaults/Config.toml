@@ -1,0 +1,94 @@
+# LynxTools 1.0 — 所有字段均校验类型；拼写错误/未知字段使重载失败。
+# 路径相对于服务器工作目录；storage 与 warp 名称规则需要重启。
+[storage]
+database = "plugins/LynxTools/Data.db"
+busy_timeout_ms = 3000 # 0..30000；仅数据库工作线程等待锁
+queue_capacity = 256 # 16..4096
+shutdown_timeout_seconds = 15 # 1..120
+
+[language]
+code = "zh_cn" # 对应 plugins/LynxTools/Lang/<code>.toml
+
+[logging]
+startup_banner = true # 启动时输出 Lynx ASCII 字符画；需要重启
+
+[nametags]
+enabled = false # 可选 LynxTags 客户端协议；不创建/改写 scoreboard team
+refresh_ticks = 20 # 1..1200；当前上下文前后缀更新周期，LP 事件另行触发
+updates_per_tick = 8 # 1..64；每 tick 最多重新计算的玩家数
+name_format = "<gradient:#42D9E8:#B58AFF><name></gradient>" # <name> 是安全纯文本占位符
+max_characters = 128 # 16..256，包含前缀/用户名/后缀；超过时截断
+# LP prefix/suffix 使用 MiniMessage 的颜色、渐变、装饰和 reset 标签。
+# 不执行 click/hover/selector 等交互标签，不读取或修改 TAB/chat/team。
+
+[modules]
+warp = true
+home = true
+back = true
+gm = true
+fly = true
+suicide = true
+requests = true
+
+# LuckPerms 必需。以下仅用于 LP 返回 UNDEFINED 时；明确 false 始终优先。
+# 不使用 OP 等级。节点固定，默认策略可重载。
+[permissions]
+warp = true
+setwarp = false
+home = true
+sethome = true
+back = true
+gm = false
+fly = false
+fly_others = false
+reload = false
+suicide = false
+suicide_keepinventory = false
+tpr = true
+tpa = true
+tpd = true
+# 仅真实服务端控制台可以 reload；命令方块/RCON/其它实体一律拒绝。
+console_reload = true
+
+[requests]
+timeout_seconds = 60 # 5..300，请求超时；重启不保留
+cooldown_seconds = 5 # 0..3600，发起请求冷却
+max_incoming = 5 # 1..32，每个接收者的待处理请求上限
+max_pending = 256 # 1..1024，全服待处理上限
+# 接受后使用 teleport 中相同的安全/等待/冷却策略。
+# 接收者在准备期间移动、离线、死亡或切维度会取消；忽略仅移除本次请求。
+
+[warp]
+max_name_length = 32 # 1..64，需要重启；名称仅 [a-zA-Z0-9_-]，统一小写
+overwrite = false # 已存在名称默认拒绝
+per_warp_permissions = false # 开启后需要 lynxtools.warp.<小写名称>，UNDEFINED 默认拒绝
+default_yaw = 0.0 # -180..180，坐标形式不填方向时使用
+default_pitch = 0.0 # -90..90
+
+[teleport]
+strategy = "safe" # safe 或 exact；exact 仍检查边界/碰撞，reject_danger 控制危险物
+search_radius = 8 # 0..32，水平和垂直范围；优先离原始点近的位置
+max_candidates = 4096 # 1..65536，每个请求累计候选上限
+checks_per_tick = 128 # 1..1024，全服所有请求共享预算
+chunk_timeout_seconds = 15 # 1..120，等待区块和安全搜索的总期限
+max_pending = 32 # 1..256，同时处理请求上限
+chunk_loads_per_tick = 1 # 1..8，全服每 tick 新区块组请求上限
+max_chunk_loads = 9 # 1..32，每次传送最多加载几组 3x3 区块
+reject_danger = true
+dangerous_blocks = ["minecraft:lava", "minecraft:fire", "minecraft:soul_fire", "minecraft:magma_block", "minecraft:cactus", "minecraft:campfire", "minecraft:soul_campfire", "minecraft:sweet_berry_bush", "minecraft:wither_rose", "minecraft:powder_snow", "minecraft:nether_portal", "minecraft:end_portal", "minecraft:end_gateway"]
+blocked_source_dimensions = [] # 例如 ["minecraft:the_end"]
+blocked_target_dimensions = []
+cooldown_seconds = 0 # 0..86400，完成传送后起算；三种命令共享
+wait_seconds = 0 # 0..300；移动、实际受伤、死亡、离线、维度变化取消
+move_tolerance = 0.1 # 0..10 方块；转头不取消
+dismount = false # false 拒绝乘客/载具；true 传送前下车（不搬运载具）
+
+[back]
+consume = false # 成功后仅删除本次使用的记录；较新死亡不受影响
+always_safe = true # 即使 strategy=exact 仍做安全搜索，拒绝虚空/岩浆
+
+[fly]
+# 状态不持久化；死亡/退出清除，维度与游戏模式变化后重新协调。
+recheck_ticks = 20 # 1..1200；权限撤销最迟在此周期撤回
+disable_in_air = "protect" # protect 短暂一次性坠落保护，或 immediate 直接撤回
+fall_protection_ticks = 100 # 1..600；落地、第一次坠落伤害、死亡/离线到期即清除

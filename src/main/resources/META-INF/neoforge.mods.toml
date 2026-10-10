@@ -1,0 +1,25 @@
+license="GPL-3.0-or-later"
+[[mods]]
+modId="lynxtools"
+version="1.0.0"
+displayName="LynxTools"
+description="Server-side administration tools. No client installation required."
+[[mixins]]
+config="lynxtools.mixins.json"
+[[dependencies.lynxtools]]
+modId="neoforge"
+type="required"
+versionRange="[26.1.2.115,26.1.3)"
+ordering="NONE"
+side="SERVER"
+[[dependencies.lynxtools]]
+modId="minecraft"
+type="required"
+versionRange="[26.1.2]"
+side="SERVER"
+[[dependencies.lynxtools]]
+modId="luckperms"
+type="required"
+versionRange="[5.5.52,)"
+ordering="AFTER"
+side="SERVER"
