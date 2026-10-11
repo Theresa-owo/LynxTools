@@ -28,6 +28,8 @@ import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.GameType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.SlabType
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.common.NeoForgeMod
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
@@ -161,6 +163,11 @@ class LifecycleProbe {
             actor=register(UUID.randomUUID(),"LynxActor"); actor.snapTo(12.5,200.0,12.5,0f,0f)
             grant(p,"lynxtools.command.*",true)
         }
+        if(System.getProperty("lynxtools.verification.terrain")=="true") {
+            terrainCases(overworld,nether)
+            action("finish terrain") { finish(true) }
+            return
+        }
         if(restart) {
             action("read persisted death in second JVM") { future=app.store.get("death",uuid.toString()) }
             waitFor("death recovered after JVM restart") { if(!future!!.isDone) false else { death=future!!.join() as Death; check(death!!.place.dimension=="minecraft:the_nether"); true } }
@@ -182,9 +189,9 @@ class LifecycleProbe {
             rejected("warp probe_nether","维度")
             config("teleport.strategy" to "exact")
             action("danger floor") { nether.setBlock(BlockPos(8,199,8),Blocks.MAGMA_BLOCK.defaultBlockState(),3); move(overworld) }
-            rejected("warp probe_nether","未找到")
+            request("warp probe_nether",nether,8.5,200.0,8.5)
             config()
-            request("warp probe_nether",nether,7.5,200.0,8.5)
+            request("warp probe_nether",nether,8.5,200.0,8.5)
             action("restore floor and native death") {
                 nether.setBlock(BlockPos(8,199,8),Blocks.STONE.defaultBlockState(),3); move(nether)
                 p.invulnerableTime=0; p.kill(p.level()); check(!p.isAlive)
@@ -249,6 +256,80 @@ class LifecycleProbe {
             request("back",nether,8.5,200.0,8.5)
         }
         action("finish") { finish(true) }
+    }
+    private fun terrainCases(overworld:ServerLevel,nether:ServerLevel) {
+        val end=app.server.getLevel(Level.END)!!
+        val actual=Place("minecraft:the_end",309.76705445397545,1.0625,0.6511966766345503,-89.8472900390625f,-0.954871416091919f)
+        config("teleport.checks_per_tick" to 1,"teleport.search_radius" to 2,"teleport.max_candidates" to 128)
+        action("load actual carpet column in end") { future=end.chunkSource.addTicketAndLoadWithRadius(TicketType.PLAYER_SPAWN,ChunkPos(19,0),1) }
+        waitFor("end chunks ready") { future!!.isDone.also { if(it) future!!.join() } }
+        action("build real carpet warp surface") {
+            for(x in 307..312) for(z in -2..3) {
+                end.setBlock(BlockPos(x,0,z),Blocks.STONE.defaultBlockState(),3)
+                for(y in 1..5) end.setBlock(BlockPos(x,y,z),Blocks.AIR.defaultBlockState(),3)
+            }
+            end.setBlock(BlockPos(309,1,0),Blocks.WHITE_CARPET.defaultBlockState(),3)
+            move(overworld)
+        }
+        save("warp","terrain_carpet",actual)
+        request("warp terrain_carpet",end,actual.x,actual.y,actual.z)
+        action("warp preserves every saved component exactly") { check(app.place(p)==actual); move(overworld) }
+        // Intentional solid obstruction: warp still executes its saved destination, home must not.
+        action("obstruct warp body") { end.setBlock(BlockPos(309,2,0),Blocks.STONE.defaultBlockState(),3) }
+        request("warp terrain_carpet",end,actual.x,actual.y,actual.z)
+        action("warp still exact inside obstruction") { check(app.place(p)==actual); move(overworld); end.setBlock(BlockPos(309,2,0),Blocks.AIR.defaultBlockState(),3) }
+        save("warp","terrain_invalid_height",actual.copy(y=9999.0))
+        rejected("warp terrain_invalid_height","坐标无效")
+        save("warp","terrain_removed_dimension",actual.copy(dimension="lynxtools:removed"))
+        rejected("warp terrain_removed_dimension","维度")
+        action("warp bounds still include entire body") {
+            val edge=end.worldBorder.maxX
+            check(!app.teleports.bounds(end,actual.copy(x=edge-0.1)))
+        }
+        save("death",uuid.toString(),actual)
+        request("back",end,actual.x,actual.y,actual.z)
+        action("back retains exact carpet feet") { check(app.place(p)==actual); move(overworld) }
+        fun clear() {
+            move(overworld)
+            for(x in 4..12) for(z in 4..12) for(y in 195..206) nether.setBlock(BlockPos(x,y,z),Blocks.AIR.defaultBlockState(),3)
+        }
+        val shapes=listOf(
+            Triple("stone",Blocks.STONE.defaultBlockState(),200.0),
+            Triple("carpet",Blocks.WHITE_CARPET.defaultBlockState(),199.0625),
+            Triple("fence",Blocks.OAK_FENCE.defaultBlockState(),200.5),
+            Triple("pane",Blocks.GLASS_PANE.defaultBlockState(),200.0),
+            Triple("wall",Blocks.COBBLESTONE_WALL.defaultBlockState(),200.5),
+            Triple("bottom slab",Blocks.STONE_SLAB.defaultBlockState(),199.5),
+            Triple("top slab",Blocks.STONE_SLAB.defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE,SlabType.TOP),200.0),
+            Triple("stairs",Blocks.OAK_STAIRS.defaultBlockState(),200.0),
+            Triple("snow layers",Blocks.SNOW.defaultBlockState().setValue(BlockStateProperties.LAYERS,4),199.375)
+        )
+        val rough=Place("minecraft:the_nether",8.5,199.9,8.5,21f,-11f)
+        for((name,block,height) in shapes) {
+            action("prepare $name collision surface") { clear(); nether.setBlock(BlockPos(8,198,8),Blocks.STONE.defaultBlockState(),3); nether.setBlock(BlockPos(8,199,8),block,3) }
+            save("death",uuid.toString(),rough)
+            request("back",nether,8.5,height,8.5)
+            action("verify $name exact collision top and original death retained") {
+                check(kotlin.math.abs(p.y-height)<1.0e-7 && p.yRot==21f && p.xRot == -11f)
+                future=app.store.get("death",uuid.toString())
+            }
+            waitFor("$name death unchanged") { future!!.isDone.also { if(it) check((future!!.join() as Death).place==rough) } }
+        }
+        action("prepare void") { clear() }
+        save("death",uuid.toString(),rough.copy(y=200.0))
+        rejected("back","未找到")
+        action("prepare lava") { clear(); for(x in 4..12) for(z in 4..12) nether.setBlock(BlockPos(x,199,z),Blocks.LAVA.defaultBlockState(),3) }
+        rejected("back","未找到")
+        save("home",uuid.toString(),rough.copy(y=200.0))
+        rejected("home","未找到")
+        save("warp","terrain_lava",rough.copy(y=200.0))
+        request("warp terrain_lava",nether,8.5,200.0,8.5)
+        action("prepare blocked headroom across bounded search") {
+            clear(); nether.setBlock(BlockPos(8,199,8),Blocks.STONE.defaultBlockState(),3)
+            for(x in 4..12) for(z in 4..12) for(y in 201..206) nether.setBlock(BlockPos(x,y,z),Blocks.STONE.defaultBlockState(),3)
+        }
+        rejected("back","未找到")
+        action("terrain result") { log.info("TERRAIN_PROBES_PASSED: exact end carpet warp including yaw/pitch and obstruction/lava bypass; back carpet/fence/pane/wall/slabs/stairs/snow/stone; void/lava/headroom and home rejection; budget=1; saved death unchanged") }
     }
     private fun requestCases(overworld:ServerLevel) {
         config("requests.cooldown_seconds" to 0)

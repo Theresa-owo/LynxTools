@@ -10,8 +10,12 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.level.TicketType
 import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.BlockCollisions
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
+import net.minecraft.world.phys.shapes.VoxelShape
 import java.util.UUID
 import java.util.concurrent.CompletableFuture
 import kotlin.math.floor
@@ -20,7 +24,7 @@ import kotlin.math.ceil
 class Teleports(private val app: Runtime) {
     private data class Request(val player: ServerPlayer, val command: String, val name: String, val start: Place,
         val begin: Long, val token: UUID = UUID.randomUUID(), var destination: Death? = null,
-        var candidates: Iterator<Place>? = null, var candidate: Place? = null, var checked: Int = 0,
+        var candidates: Iterator<Place>? = null, var candidate: Place? = null, var checked: Int = 0, var search: Boolean = false,
         var level: ServerLevel? = null, val chunks: MutableMap<ChunkPos,CompletableFuture<*>> = mutableMapOf(),
         var anchor: ServerPlayer? = null, var anchorStart: Place? = null)
     private val pending=linkedMapOf<UUID,Request>()
@@ -94,8 +98,8 @@ class Teleports(private val app: Runtime) {
                 if(level==null || r.start.dimension in app.config.strings("teleport.blocked_source_dimensions") || death.place.dimension in app.config.strings("teleport.blocked_target_dimensions")) { cancel(p.uuid,"dimension"); continue }
                 if(!bounds(level,death.place)) { cancel(p.uuid,"invalid_position"); continue }
                 r.level=level
-                val safe=app.config.string("teleport.strategy")=="safe" || r.command=="back" && app.config.bool("back.always_safe")
-                r.candidates=candidates(death.place,if(safe) app.config.int("teleport.search_radius") else 0,safe).iterator()
+                r.search=r.command!="warp" && (app.config.string("teleport.strategy")=="safe" || r.command=="back" && app.config.bool("back.always_safe"))
+                r.candidates=candidates(death.place,if(r.search) app.config.int("teleport.search_radius") else 0,r.search).iterator()
             }
             val level=r.level!!
             r.chunks.keys.forEach { level.chunkSource.addTicketWithRadius(TicketType.SPAWN_SEARCH,it,1) }
@@ -119,8 +123,12 @@ class Teleports(private val app: Runtime) {
                 if(future.isCompletedExceptionally) { cancel(p.uuid,"timeout"); break }
                 // A completed future does not guarantee success; never synchronously load a missing neighbour.
                 if((-1..1).any { dx -> (-1..1).any { dz -> level.chunkSource.getChunkNow(pos.x+dx,pos.z+dz)==null } }) { cancel(p.uuid,"timeout"); break }
-                if(safe(level,p,candidate,r.command=="back" && app.config.bool("back.always_safe") || app.config.bool("teleport.reject_danger"))) {
-                    finish(r,candidate); break
+                // Warp is an administrator-defined exact destination. Never alter its stored coordinates.
+                if(r.command=="warp") { finish(r,candidate); break }
+                // First check the saved position unchanged; subsequent lattice anchors resolve real collision tops.
+                val landing=if(r.search && r.checked>1) surface(level,p,candidate) else candidate
+                if(bounds(level,landing) && safe(level,p,landing,r.command=="back" && app.config.bool("back.always_safe") || app.config.bool("teleport.reject_danger"))) {
+                    finish(r,landing); break
                 }
                 r.candidate=null
             }
@@ -145,18 +153,37 @@ class Teleports(private val app: Runtime) {
         }
     }
     fun state(p: ServerPlayer) = p.isAlive && !p.isRemoved && !p.isSleeping && !p.isChangingDimension && p.connection.hasClientLoaded() && !p.isVehicle && (!p.isPassenger || app.config.bool("teleport.dismount"))
-    fun bounds(level: ServerLevel, place: Place) = place.valid() && place.y>=level.minY && place.y+1.8<=level.maxY+1.0 && level.worldBorder.isWithinBounds(BlockPos.containing(place.x,place.y,place.z)) && kotlin.math.abs(place.x)<29999984 && kotlin.math.abs(place.z)<29999984
+    fun bounds(level: ServerLevel, place: Place) = place.valid() && place.y>=level.minY && place.y+1.8<=level.maxY+1.0 && level.worldBorder.isWithinBounds(AABB(place.x-0.3,place.y,place.z-0.3,place.x+0.3,place.y+1.8,place.z+0.3)) && kotlin.math.abs(place.x)<29999984 && kotlin.math.abs(place.z)<29999984
     private fun safe(level: ServerLevel, p: ServerPlayer, v: Place, danger: Boolean): Boolean {
         val box=AABB(v.x-0.3,v.y,v.z-0.3,v.x+0.3,v.y+1.8,v.z+0.3)
-        if(!level.worldBorder.isWithinBounds(box) || !level.noCollision(p,box)) return false
-        val floor=BlockPos.containing(v.x,v.y-0.01,v.z)
-        if(!level.getBlockState(floor).isFaceSturdy(level,floor,Direction.UP)) return false
+        if(!level.worldBorder.isWithinBounds(box) || collisions(level,p,box,v.y).hasNext() || !level.noEntityCollision(p,box)) return false
         val hazards=app.config.strings("teleport.dangerous_blocks")
-        for(pos in BlockPos.betweenClosed(BlockPos.containing(box.minX,box.minY-0.01,box.minZ),BlockPos.containing(box.maxX,box.maxY,box.maxZ))) {
+        fun hazardous(pos:BlockPos):Boolean {
             val state=level.getBlockState(pos)
-            if(danger && (!state.fluidState.isEmpty || BuiltInRegistries.BLOCK.getKey(state.block).toString() in hazards)) return false
+            return danger && (!state.fluidState.isEmpty || BuiltInRegistries.BLOCK.getKey(state.block).toString() in hazards)
+        }
+        // A tiny downward sweep must hit an actual block shape, including narrow/extended shapes.
+        var supported=false
+        for((pos,_) in collisions(level,p,box.move(0.0,-1.0e-5,0.0),v.y)) {
+            supported=true
+            if(hazardous(pos)) return false
+        }
+        if(!supported) return false
+        for(pos in BlockPos.betweenClosed(BlockPos.containing(box.minX,box.minY-0.01,box.minZ),BlockPos.containing(box.maxX,box.maxY,box.maxZ))) {
+            if(hazardous(pos)) return false
         }
         return true
+    }
+    private fun collisions(level:ServerLevel,p:ServerPlayer,box:AABB,feetY:Double):BlockCollisions<Pair<BlockPos,VoxelShape>> =
+        BlockCollisions(level,CollisionContext.withPosition(p,feetY),box,false) { pos,shape -> pos.immutable() to shape }
+
+    /** One bounded vertical sweep per lattice anchor, no integer-height or full-face assumptions. */
+    private fun surface(level:ServerLevel,p:ServerPlayer,anchor:Place):Place {
+        val top=anchor.y+0.5+1.0e-5
+        val foot=AABB(anchor.x-0.3,top,anchor.z-0.3,anchor.x+0.3,top+1.0e-5,anchor.z+0.3)
+        val distance=-1.0-2.0e-5
+        val shapes=Iterable { collisions(level,p,foot.expandTowards(0.0,distance,0.0),top).asSequence().map { it.second }.iterator() }
+        return anchor.copy(y=top+Shapes.collide(Direction.Axis.Y,foot,shapes,distance))
     }
     companion object {
         /** Best-first lattice search, bounded by caller; nearest Euclidean offset first, no cube allocation. */

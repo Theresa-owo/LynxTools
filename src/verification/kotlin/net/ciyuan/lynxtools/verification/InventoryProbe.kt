@@ -36,7 +36,7 @@ class InventoryProbe {
         if(System.getProperty("lynxtools.verification.vanish")=="true") VanishProbe()
         if(System.getProperty("lynxtools.verification.tags")=="true") TagServerProbe()
         if(System.getProperty("lynxtools.verification.lifecycle")=="true") LifecycleProbe()
-        NeoForge.EVENT_BUS.addListener<ServerStartedEvent> { event -> if(System.getProperty("lynxtools.verification.tags")!="true" && System.getProperty("lynxtools.verification.vanish")!="true") run(event) }
+        NeoForge.EVENT_BUS.addListener<ServerStartedEvent> { event -> if(System.getProperty("lynxtools.verification.tags")!="true" && System.getProperty("lynxtools.verification.vanish")!="true" && System.getProperty("lynxtools.verification.terrain")!="true") run(event) }
         NeoForge.EVENT_BUS.addListener<EntityJoinLevelEvent> { event -> if(measuring && event.entity is ItemEntity) itemDrops++ }
         NeoForge.EVENT_BUS.addListener<ServerTickEvent.Post> { event ->
             if(System.getProperty("lynxtools.verification.lifecycle")!="true" && System.getProperty("lynxtools.verification.autoStop")=="true" && ++ticks==100) event.server.halt(false)

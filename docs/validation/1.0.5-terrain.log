@@ -1,0 +1,190 @@
+[1210月2026 00:00:00.112] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/E:/Projects/Minecraft/LynxTools/.verification/server/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=SERVER
+[1210月2026 00:00:00.182] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Loading FML Plugins:
+[1210月2026 00:00:00.205] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > adventure-api-4.26.1.jar
+[1210月2026 00:00:00.217] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > adventure-key-4.26.1.jar
+[1210月2026 00:00:00.218] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > kotlin-stdlib-2.3.20.jar
+[1210月2026 00:00:00.231] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > examination-string-1.3.0.jar
+[1210月2026 00:00:00.231] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > examination-api-1.3.0.jar
+[1210月2026 00:00:00.231] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > sqlite-jdbc-3.51.3.0.jar
+[1210月2026 00:00:00.233] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - mods/LynxTools-1.0.5.jar > adventure-text-minimessage-4.26.1.jar
+[1210月2026 00:00:00.233] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]:  - ~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > net.neoforged.neoforge-coremods-26.1.2.115.jar
+[1210月2026 00:00:00.292] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Building game content classloader:
+ - luckperms (jar(mods/LuckPerms-NeoForge-5.5.52.jar))
+ - lynxtools (jar(mods/LynxTools-1.0.5.jar))
+ - lynxtools_verification (jar(mods/LynxTools-verification-1.0.5.jar))
+ - minecraft (jar(~libraries/net/neoforged/minecraft-server-patched/26.1.2.115/minecraft-server-patched-26.1.2.115.jar))
+ - mixinextras.neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar > mixinextras-neoforge-0.5.5.jar))
+ - neoforge (jar(~libraries/net/neoforged/neoforge/26.1.2.115/neoforge-26.1.2.115-universal.jar))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[1210月2026 00:00:00.301] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Built game content classloader in 14ms
+[1210月2026 00:00:01.029] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[1210月2026 00:00:03.525] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 26.1.2.115, for MC 26.1.2
+[1210月2026 00:00:03.957] [modloading-worker-0/INFO] [luckperms/]: Loading configuration...
+[1210月2026 00:00:04.096] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[1210月2026 00:00:05.035] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1515 recipes
+[1210月2026 00:00:05.043] [main/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1617 advancements
+[1210月2026 00:00:05.044] [main/INFO] [net.neoforged.neoforge.common.crafting.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[1210月2026 00:00:05.111] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 26.1.2
+[1210月2026 00:00:05.112] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[1210月2026 00:00:05.112] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[1210月2026 00:00:05.112] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[1210月2026 00:00:05.147] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on 127.0.0.1:25579
+[1210月2026 00:00:05.257] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:         __    
+[1210月2026 00:00:05.258] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:   |    |__)   LuckPerms v5.5.52
+[1210月2026 00:00:05.258] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]:   |___ |      Running on NeoForge
+[1210月2026 00:00:05.258] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: 
+[1210月2026 00:00:05.272] [Server thread/INFO] [luckperms/]: Loading storage provider... [H2]
+[1210月2026 00:00:05.367] [Server thread/INFO] [luckperms/]: Loading internal permission managers...
+[1210月2026 00:00:05.380] [Server thread/INFO] [luckperms/]: Performing initial data load...
+[1210月2026 00:00:05.396] [Server thread/INFO] [luckperms/]: Successfully enabled. (took 1639ms)
+[1210月2026 00:00:05.396] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "validation-world"
+[1210月2026 00:00:05.572] [Server thread/INFO] [net.minecraft.server.level.progress.LoggingLevelLoadListener/]: Loading 0 persistent chunks...
+[1210月2026 00:00:05.583] [Server thread/INFO] [net.minecraft.server.level.progress.LoggingLevelLoadListener/]: Time elapsed: 11 ms
+[1210月2026 00:00:05.583] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (0.367s)! For help, type "help"
+[1210月2026 00:00:05.584] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[1210月2026 00:00:05.818] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[1210月2026 00:00:05.830] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[1210月2026 00:00:05.837] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1210月2026 00:00:05.837] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1210月2026 00:00:05.837] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1210月2026 00:00:05.837] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1210月2026 00:00:05.848] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler luckperms:permission_handler
+[1210月2026 00:00:06.098] [Server thread/INFO] [LynxTools/]: 
+ _
+| |   _   _ _ __ __  __
+| |  | | | | '_ \\ \/ /
+| |__| |_| | | | |>  <
+|_____\__, |_| |_/_/\_\
+      |___/
+[1210月2026 00:00:06.098] [Server thread/INFO] [LynxTools/]: LynxTools ready: Minecraft 26.1.2 / NeoForge 26.1.2.115, online-mode=true, schema=1
+[1210月2026 00:00:06.130] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare two real dimensions
+[1210月2026 00:00:06.281] [Server thread/INFO] [LynxToolsLifecycle/]: PASS chunks loaded
+[1210月2026 00:00:06.399] [Server thread/INFO] [LynxToolsLifecycle/]: PASS players online via test registration; no authenticated client
+[1210月2026 00:00:06.431] [Server thread/INFO] [LynxToolsLifecycle/]: PASS configure [teleport.checks_per_tick, teleport.search_radius, teleport.max_candidates]
+[1210月2026 00:00:06.446] [Server thread/INFO] [LynxToolsLifecycle/]: PASS load actual carpet column in end
+[1210月2026 00:00:06.609] [Server thread/INFO] [LynxToolsLifecycle/]: PASS end chunks ready
+[1210月2026 00:00:06.620] [Server thread/INFO] [LynxToolsLifecycle/]: PASS build real carpet warp surface
+[1210月2026 00:00:06.658] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save warp terrain_carpet
+[1210月2026 00:00:06.705] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit warp
+[1210月2026 00:00:06.767] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request warp terrain_carpet
+[1210月2026 00:00:06.822] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete warp terrain_carpet
+[1210月2026 00:00:06.881] [Server thread/INFO] [LynxToolsLifecycle/]: PASS warp preserves every saved component exactly
+[1210月2026 00:00:06.968] [Server thread/INFO] [LynxToolsLifecycle/]: PASS obstruct warp body
+[1210月2026 00:00:06.998] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request warp terrain_carpet
+[1210月2026 00:00:07.013] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete warp terrain_carpet
+[1210月2026 00:00:07.061] [Server thread/INFO] [LynxToolsLifecycle/]: PASS warp still exact inside obstruction
+[1210月2026 00:00:07.105] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save warp terrain_invalid_height
+[1210月2026 00:00:07.164] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit warp
+[1210月2026 00:00:07.206] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection warp terrain_invalid_height
+[1210月2026 00:00:07.265] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject warp terrain_invalid_height: 坐标无效
+[1210月2026 00:00:07.305] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save warp terrain_removed_dimension
+[1210月2026 00:00:07.354] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit warp
+[1210月2026 00:00:07.406] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection warp terrain_removed_dimension
+[1210月2026 00:00:07.454] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject warp terrain_removed_dimension: 维度
+[1210月2026 00:00:07.505] [Server thread/INFO] [LynxToolsLifecycle/]: PASS warp bounds still include entire body
+[1210月2026 00:00:07.555] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:07.604] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:07.654] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:07.807] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:07.879] [Server thread/INFO] [LynxToolsLifecycle/]: PASS back retains exact carpet feet
+[1210月2026 00:00:07.923] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare stone collision surface
+[1210月2026 00:00:07.960] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:08.008] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:08.055] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:08.209] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:08.311] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify stone exact collision top and original death retained
+[1210月2026 00:00:08.341] [Server thread/INFO] [LynxToolsLifecycle/]: PASS stone death unchanged
+[1210月2026 00:00:08.405] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare carpet collision surface
+[1210月2026 00:00:08.414] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:08.467] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:08.505] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:08.757] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:08.823] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify carpet exact collision top and original death retained
+[1210月2026 00:00:08.880] [Server thread/INFO] [LynxToolsLifecycle/]: PASS carpet death unchanged
+[1210月2026 00:00:08.922] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare fence collision surface
+[1210月2026 00:00:08.959] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:09.011] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:09.054] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:09.257] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:09.325] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify fence exact collision top and original death retained
+[1210月2026 00:00:09.377] [Server thread/INFO] [LynxToolsLifecycle/]: PASS fence death unchanged
+[1210月2026 00:00:09.414] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare pane collision surface
+[1210月2026 00:00:09.460] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:09.510] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:09.554] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:09.755] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:09.818] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify pane exact collision top and original death retained
+[1210月2026 00:00:09.874] [Server thread/INFO] [LynxToolsLifecycle/]: PASS pane death unchanged
+[1210月2026 00:00:09.910] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare wall collision surface
+[1210月2026 00:00:09.956] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:10.011] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:10.054] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:10.205] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:10.257] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify wall exact collision top and original death retained
+[1210月2026 00:00:10.319] [Server thread/INFO] [LynxToolsLifecycle/]: PASS wall death unchanged
+[1210月2026 00:00:10.373] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare bottom slab collision surface
+[1210月2026 00:00:10.406] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:10.462] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:10.505] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:10.656] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:10.718] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify bottom slab exact collision top and original death retained
+[1210月2026 00:00:10.769] [Server thread/INFO] [LynxToolsLifecycle/]: PASS bottom slab death unchanged
+[1210月2026 00:00:10.810] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare top slab collision surface
+[1210月2026 00:00:10.856] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:10.906] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:10.954] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:11.106] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:11.168] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify top slab exact collision top and original death retained
+[1210月2026 00:00:11.217] [Server thread/INFO] [LynxToolsLifecycle/]: PASS top slab death unchanged
+[1210月2026 00:00:11.259] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare stairs collision surface
+[1210月2026 00:00:11.305] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:11.357] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:11.404] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:11.556] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:11.619] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify stairs exact collision top and original death retained
+[1210月2026 00:00:11.669] [Server thread/INFO] [LynxToolsLifecycle/]: PASS stairs death unchanged
+[1210月2026 00:00:11.712] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare snow layers collision surface
+[1210月2026 00:00:11.757] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:11.807] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:11.854] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request back
+[1210月2026 00:00:12.055] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete back
+[1210月2026 00:00:12.118] [Server thread/INFO] [LynxToolsLifecycle/]: PASS verify snow layers exact collision top and original death retained
+[1210月2026 00:00:12.169] [Server thread/INFO] [LynxToolsLifecycle/]: PASS snow layers death unchanged
+[1210月2026 00:00:12.211] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare void
+[1210月2026 00:00:12.257] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save death 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:12.308] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit death
+[1210月2026 00:00:12.354] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection back
+[1210月2026 00:00:18.753] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject back: 未找到
+[1210月2026 00:00:18.806] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare lava
+[1210月2026 00:00:18.859] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection back
+[1210月2026 00:00:25.254] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject back: 未找到
+[1210月2026 00:00:25.303] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save home 53969817-1e97-427a-b591-65544f04c61b
+[1210月2026 00:00:25.356] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit home
+[1210月2026 00:00:25.404] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection home
+[1210月2026 00:00:31.802] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject home: 未找到
+[1210月2026 00:00:31.852] [Server thread/INFO] [LynxToolsLifecycle/]: PASS save warp terrain_lava
+[1210月2026 00:00:31.904] [Server thread/INFO] [LynxToolsLifecycle/]: PASS commit warp
+[1210月2026 00:00:31.953] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request warp terrain_lava
+[1210月2026 00:00:32.105] [Server thread/INFO] [LynxToolsLifecycle/]: PASS complete warp terrain_lava
+[1210月2026 00:00:32.170] [Server thread/INFO] [LynxToolsLifecycle/]: PASS prepare blocked headroom across bounded search
+[1210月2026 00:00:32.204] [Server thread/INFO] [LynxToolsLifecycle/]: PASS request rejection back
+[1210月2026 00:00:38.553] [Server thread/INFO] [LynxToolsLifecycle/]: PASS reject back: 未找到
+[1210月2026 00:00:38.602] [Server thread/INFO] [LynxToolsLifecycle/]: TERRAIN_PROBES_PASSED: exact end carpet warp including yaw/pitch and obstruction/lava bypass; back carpet/fence/pane/wall/slabs/stairs/snow/stone; void/lava/headroom and home rejection; budget=1; saved death unchanged
+[1210月2026 00:00:38.602] [Server thread/INFO] [LynxToolsLifecycle/]: PASS terrain result
+[1210月2026 00:00:38.665] [Server thread/INFO] [LynxToolsLifecycle/]: LIFECYCLE_RESULT success=true restart=false completed=113
+[1210月2026 00:00:38.665] [Server thread/INFO] [LynxToolsLifecycle/]: PASS finish terrain
+[1210月2026 00:00:38.704] [Server thread/INFO] [luckperms/]: Starting shutdown process...
+[1210月2026 00:00:38.707] [Server thread/INFO] [luckperms/]: Closing storage...
+[1210月2026 00:00:38.715] [Server thread/INFO] [luckperms/]: Goodbye!
+[1210月2026 00:00:38.716] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[1210月2026 00:00:38.716] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[1210月2026 00:00:38.716] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[1210月2026 00:00:38.725] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:overworld
+[1210月2026 00:00:38.771] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_nether
+[1210月2026 00:00:38.778] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[validation-world]'/minecraft:the_end
+[1210月2026 00:00:38.785] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1210月2026 00:00:38.785] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1210月2026 00:00:38.786] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1210月2026 00:00:38.786] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1210月2026 00:00:38.804] [main/INFO] [net.neoforged.fml.loading.FMLLoader/]: Closing FML Loader 1c88d9e6
+[1210月2026 00:00:38.805] [main/INFO] [net.neoforged.fml.ModLoader/]: Clearing ModLoader

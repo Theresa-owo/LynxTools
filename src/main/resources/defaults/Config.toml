@@ -77,8 +77,8 @@ default_yaw = 0.0 # -180..180，坐标形式不填方向时使用
 default_pitch = 0.0 # -90..90
 
 [teleport]
-strategy = "safe" # safe 或 exact；exact 仍检查边界/碰撞，reject_danger 控制危险物
-search_radius = 8 # 0..32，水平和垂直范围；优先离原始点近的位置
+strategy = "safe" # home/back/请求传送用 safe 或 exact；warp 始终按存点精确传送，不检查地形
+search_radius = 8 # 0..32，水平/垂直格点范围；每个格点在上下半格内寻找实际碰撞表面
 max_candidates = 4096 # 1..65536，每个请求累计候选上限
 checks_per_tick = 128 # 1..1024，全服所有请求共享预算
 chunk_timeout_seconds = 15 # 1..120，等待区块和安全搜索的总期限
